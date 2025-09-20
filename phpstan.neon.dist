@@ -1,0 +1,8 @@
+# phpstan.neon.dist
+
+parameters:
+    level: 9
+    paths:
+        - src
+    doctrine:
+        objectManagerLoader: bin/doctrine-object-manager-loader.php

@@ -1,0 +1,60 @@
+# .github/workflows/ci.yml
+
+name: Symfony CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          extensions: pgsql, zip, intl
+          tools: composer:v2
+
+      - name: Install Dependencies
+        uses: ramsey/composer-install@v3
+
+      - name: Generate JWT Keys
+        env:
+          JWT_PASSPHRASE: a-test-passphrase
+        run: |
+          mkdir -p config/jwt
+          php bin/console lexik:jwt:generate-keypair --skip-if-exists
+
+      - name: Run PhpStan
+        run: composer stan
+
+      - name: Run Tests
+        env:
+          DATABASE_URL: "postgresql://user:password@localhost:5432/test_db"
+          JWT_PASSPHRASE: a-test-passphrase
+        run: |
+          php bin/console doctrine:migrations:migrate -n --env=test
+          php bin/console doctrine:fixtures:load -n --env=test
+          php bin/phpunit
+
+    services:
+      postgres:
+        image: postgres:15-alpine
+        env:
+          POSTGRES_USER: user
+          POSTGRES_PASSWORD: password
+          POSTGRES_DB: test_db
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432

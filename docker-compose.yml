@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  php:
+    build:
+      context: ./docker/php
+      dockerfile: Dockerfile
+    volumes:
+      - ./:/var/www
+    depends_on:
+      - db
+
+  nginx:
+    image: nginx:1.25-alpine
+    ports:
+      - "8000:80"
+    volumes:
+      - ./:/var/www
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - php
+
+  db:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-app}
+      POSTGRES_USER: ${POSTGRES_USER:-symfony}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-super-secret-pass}
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+volumes:
+  db_data:
