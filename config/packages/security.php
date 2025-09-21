@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-use App\Access\Entity\User;
+use App\Access\Domain\Model\User;
 use Symfony\Config\SecurityConfig;
 
 return static function (SecurityConfig $security): void {

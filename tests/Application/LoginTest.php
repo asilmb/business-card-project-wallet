@@ -2,7 +2,7 @@
 
 namespace App\Tests\Application;
 
-use App\Access\Fixtures\Test\UserFixtures;
+use App\Access\Infrastructure\Fixtures\Test\UserFixtures;
 use App\Tests\E2EWebTestCase;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Response;
 class LoginTest extends E2EWebTestCase
 {
     private const HTTP_UNAUTHORIZED_BODY = '{"code":401,"message":"Invalid credentials."}';
-    private const LOGIN_ENDPOINT = '/api/login';
+    private const LOGIN_ENDPOINT = '/api/auth/login';
 
     private const LOGIN_IDENTIFIER_FIELD = 'email';
     private const LOGIN_PASSWORD_FIELD = 'password';

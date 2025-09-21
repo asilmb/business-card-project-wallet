@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Application\Response;
 
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\SerializerInterface;
 
@@ -14,16 +15,16 @@ final class ResponseSerializer
     ) {
     }
 
-    public function successResponse(object $responseObject): SuccessResponse
+    public function successResponse(object $responseObject, int $status = Response::HTTP_OK): SuccessResponse
     {
         return new SuccessResponse(
             $this->serializer->serialize(
                 [
-                    'success' => true,
                     'data'    => $responseObject,
                 ],
                 JsonEncoder::FORMAT,
             ),
+            $status
         );
     }
 
@@ -32,13 +33,8 @@ final class ResponseSerializer
         return new SuccessEmptyResponse();
     }
 
-    public function errorResponse(string $error, ?string $message = null): ErrorResponse
+    public function errorResponse(string $message, int $status = Response::HTTP_BAD_REQUEST): ErrorResponse
     {
-        return new ErrorResponse($error, $message);
-    }
-
-    public function userErrorResponse(string $message): ErrorResponse
-    {
-        return new ErrorResponse('', $message);
+        return new ErrorResponse($status, $message);
     }
 }

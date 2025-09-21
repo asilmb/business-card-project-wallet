@@ -2,7 +2,7 @@
 
 namespace App\Tests\Unit;
 
-use App\Access\Entity\User;
+use App\Access\Domain\Model\User;
 use App\Tests\UnitTestCase;
 
 class UserTest extends UnitTestCase

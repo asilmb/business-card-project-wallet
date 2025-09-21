@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Access\Command;
+namespace App\Access\Application\Cli;
 
-use App\Access\Entity\User;
+use App\Access\Domain\Model\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
@@ -16,7 +16,7 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
     name: 'app:create-user',
     description: 'Creates a new user.',
 )]
-class CreateUserCommand extends Command
+final class CreateUserCommand extends Command
 {
     public function __construct(
         private readonly EntityManagerInterface $entityManager,

@@ -16,9 +16,9 @@ return static function (DoctrineConfig $doctrine) {
     $em = $orm->entityManager('default');
     $em->namingStrategy('doctrine.orm.naming_strategy.underscore_number_aware');
 
-    $em->mapping('App')
+    $em->mapping('Access')
         ->isBundle(false)
-        ->dir('%kernel.project_dir%/src/Access/Entity')
-        ->prefix('App\Access\Entity')
-        ->alias('App');
+        ->dir('%kernel.project_dir%/src/Access/Domain/Model')
+        ->prefix('App\Access\Domain\Model')
+        ->alias('Access');
 };

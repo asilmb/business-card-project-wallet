@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Access\Fixtures\Test;
+namespace App\Access\Infrastructure\Fixtures\Test;
 
-use App\Access\Entity\User;
+use App\Access\Domain\Model\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
-class UserFixtures extends Fixture
+final class UserFixtures extends Fixture
 {
     public const TEST_USER_EMAIL = 'test@example.com';
     public const TEST_USER_PASSWORD = 'MySecretPassword123';

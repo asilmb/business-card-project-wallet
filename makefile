@@ -12,6 +12,7 @@ stan:
 	$(RUN_CMD) composer stan
 
 test:
+	@make clr
 	@make db-test-reset
 	$(RUN_CMD) php bin/phpunit
 
@@ -61,3 +62,4 @@ setup:
 
 clr:
 	$(RUN_CMD) php bin/console cache:clear
+	$(RUN_CMD) php bin/console cache:clear --env=test

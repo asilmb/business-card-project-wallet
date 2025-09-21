@@ -8,21 +8,8 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 
 final class ErrorResponse extends JsonResponse
 {
-    public readonly bool $success;
-    public readonly string $error;
-    public readonly ?string $message;
-
-    public function __construct(string $error, ?string $message = null)
+    public function __construct(int $status, ?string $message = null)
     {
-        $this->success = false;
-        $this->error = $error;
-        $this->message = $message;
-
-        parent::__construct([
-            'success' => $this->success,
-            'error'   => $this->error,
-            'message' => $this->message,
-        ]);
+        parent::__construct(data: [ 'message' => $message], status: $status);
     }
-
 }

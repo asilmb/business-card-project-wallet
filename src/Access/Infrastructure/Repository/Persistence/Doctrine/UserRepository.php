@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Access\Repository;
+namespace App\Access\Infrastructure\Repository\Persistence\Doctrine;
 
-use App\Access\Entity\User;
+use App\Access\Domain\Model\User;
+use App\Access\Domain\Repository\UserRepositoryInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
@@ -12,7 +13,7 @@ use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
 /**
  * @extends ServiceEntityRepository<User>
  */
-class UserRepository extends ServiceEntityRepository implements PasswordUpgraderInterface
+final class UserRepository extends ServiceEntityRepository implements PasswordUpgraderInterface, UserRepositoryInterface
 {
     public function __construct(ManagerRegistry $registry)
     {
@@ -26,7 +27,18 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         }
 
         $user->setPassword($newHashedPassword);
+        $this->save($user);
+    }
+
+    public function save(User $user): void
+    {
         $this->getEntityManager()->persist($user);
         $this->getEntityManager()->flush();
+    }
+
+
+    public function findByEmail(string $email): ?User
+    {
+        return $this->findOneBy(['email' => $email]);
     }
 }
