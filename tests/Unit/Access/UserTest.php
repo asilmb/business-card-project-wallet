@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\Unit;
+namespace App\Tests\Unit\Access;
 
 use App\Access\Domain\Model\User;
 use App\Tests\UnitTestCase;

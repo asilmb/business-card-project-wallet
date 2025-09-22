@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Access\Application\Exception;
 
+use App\Access\BaseAccessApplicationException;
 use Symfony\Component\HttpFoundation\Response;
 use Throwable;
 

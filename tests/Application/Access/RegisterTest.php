@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\Application;
+namespace App\Tests\Application\Access;
 
 use App\Access\Application\Exception\UserWithAlreadyExistsException;
 use App\Access\Infrastructure\Fixtures\Test\UserFixtures;

@@ -2,7 +2,7 @@
 declare(strict_types=1);
 
 
-namespace App\Access\Infrastructure\Controller\View;
+namespace App\Access\Infrastructure\Controller\AuthController;
 
 final class UserCreated
 {

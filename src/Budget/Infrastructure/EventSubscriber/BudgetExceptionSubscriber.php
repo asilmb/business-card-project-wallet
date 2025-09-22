@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Access\Infrastructure\EventSubscriber;
+namespace App\Budget\Infrastructure\EventSubscriber;
 
-use App\Access\BaseAccessApplicationException;
+use App\Budget\BaseBudgetApplicationException;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpKernel\Event\ExceptionEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 
-class AccessExceptionSubscriber implements EventSubscriberInterface
+class BudgetExceptionSubscriber implements EventSubscriberInterface
 {
     public static function getSubscribedEvents(): array
     {
@@ -19,7 +19,7 @@ class AccessExceptionSubscriber implements EventSubscriberInterface
     {
         $exception = $this->getOriginalException($event->getThrowable());
 
-        if ($exception instanceof BaseAccessApplicationException) {
+        if ($exception instanceof BaseBudgetApplicationException) {
             $responseData = [
                 'message' => $exception->getMessage(),
             ];

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Access\Infrastructure\Controller;
 
 use App\Access\Application\Command\RegisterUserCommand;
-use App\Access\Infrastructure\Controller\View\UserCreated;
+use App\Access\Infrastructure\Controller\AuthController\UserCreated;
 use App\Application\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
