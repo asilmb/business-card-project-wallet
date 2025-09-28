@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Access\Application\Cli;
 
 use App\Access\Domain\Model\User;
@@ -19,7 +21,7 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 final class CreateUserCommand extends Command
 {
     public function __construct(
-        private readonly EntityManagerInterface $entityManager,
+        private readonly EntityManagerInterface      $entityManager,
         private readonly UserPasswordHasherInterface $passwordHasher
     ) {
         parent::__construct();
@@ -42,7 +44,7 @@ final class CreateUserCommand extends Command
             return 1;
         }
         $user = new User();
-        $user->setEmail( $email);
+        $user->setEmail($email);
 
         $hashedPassword = $this->passwordHasher->hashPassword(
             $user,

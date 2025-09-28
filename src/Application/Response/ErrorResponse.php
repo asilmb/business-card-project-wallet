@@ -10,6 +10,6 @@ final class ErrorResponse extends JsonResponse
 {
     public function __construct(int $status, ?string $message = null)
     {
-        parent::__construct(data: [ 'message' => $message], status: $status);
+        parent::__construct(data: ['message' => $message], status: $status);
     }
 }

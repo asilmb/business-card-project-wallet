@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 
@@ -11,13 +12,13 @@ use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 #[AsMessageHandler(bus: 'query.bus')]
-
 final class GetMyBudgetHandler
 {
     public function __construct(
         private BudgetRepositoryInterface $budgetRepository,
-        private TokenStorageInterface $tokenStorage
-    ) {}
+        private TokenStorageInterface     $tokenStorage
+    ) {
+    }
 
     public function __invoke(GetMyBudgetQuery $command): ?Budget
     {

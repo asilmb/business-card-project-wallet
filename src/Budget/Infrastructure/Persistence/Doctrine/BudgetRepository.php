@@ -10,6 +10,9 @@ use App\Budget\Domain\Repository\BudgetRepositoryInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
+/**
+ * @extends ServiceEntityRepository<Budget>
+ */
 class BudgetRepository extends ServiceEntityRepository implements BudgetRepositoryInterface
 {
     public function __construct(ManagerRegistry $registry)

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 
@@ -11,7 +12,8 @@ use App\Tests\UnitTestCase;
 
 final class MoneyTest extends UnitTestCase
 {
-    public function testCreateMoney(): void {
+    public function testCreateMoney(): void
+    {
         $expectedAmount = 10.10;
         $expectedCurrency = Currency::EUR;
 
@@ -21,7 +23,8 @@ final class MoneyTest extends UnitTestCase
         self::assertEquals($expectedCurrency, $money->currency);
     }
 
-    public function testCreateMoneyFailed(): void {
+    public function testCreateMoneyFailed(): void
+    {
         $expectedAmount = -10.10;
         $expectedCurrency = Currency::EUR;
         $this->expectException(MoneyCreateException::class);

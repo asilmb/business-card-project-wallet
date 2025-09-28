@@ -17,8 +17,9 @@ final class CreateBudgetHandler
 {
     public function __construct(
         private BudgetRepositoryInterface $budgetRepository,
-        private TokenStorageInterface $tokenStorage
-    ) {}
+        private TokenStorageInterface     $tokenStorage
+    ) {
+    }
 
     /**
      * @throws CreateBudgetException

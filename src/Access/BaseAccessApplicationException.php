@@ -1,9 +1,12 @@
 <?php
+
 declare(strict_types=1);
 
 
 namespace App\Access;
 
-class BaseAccessApplicationException extends \Exception
+use Exception;
+
+class BaseAccessApplicationException extends Exception
 {
 }

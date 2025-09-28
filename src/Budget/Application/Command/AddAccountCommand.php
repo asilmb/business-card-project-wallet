@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 
@@ -8,6 +9,7 @@ final readonly class AddAccountCommand
 {
     public function __construct(
         public string $name,
-        public int $initialBalanceAmount
-    ) {}
+        public int    $initialBalanceAmount
+    ) {
+    }
 }

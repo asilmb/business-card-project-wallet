@@ -33,13 +33,15 @@ class Budget
     private Currency $currency;
 
 
+    /**
+     * @param ArrayCollection<int, Account> $accounts
+     */
     private function __construct(
-        User $owner,
-        string $name,
-        Currency $currency,
+        User            $owner,
+        string          $name,
+        Currency        $currency,
         ArrayCollection $accounts = new ArrayCollection(),
-    )
-    {
+    ) {
         $this->owner = $owner;
         $this->name = $name;
         $this->currency = $currency;
@@ -71,9 +73,11 @@ class Budget
         return $this->name;
     }
 
+    /**
+     * @return Collection<int, Account>
+     */
     public function getAccounts(): Collection
     {
-
         return $this->accounts;
     }
 

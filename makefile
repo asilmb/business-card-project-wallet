@@ -11,6 +11,9 @@ endif
 stan:
 	$(RUN_CMD) composer stan
 
+csf:
+	$(RUN_CMD) vendor/bin/ecs check --fix
+
 test:
 	@make clr
 	@make db-test-reset

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Shared\Exception\Infrastructure\EventSubscriber;
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -8,6 +10,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\ExceptionEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\Messenger\Exception\ValidationFailedException;
+use Throwable;
 
 class ValidationExceptionSubscriber implements EventSubscriberInterface
 {
@@ -36,7 +39,7 @@ class ValidationExceptionSubscriber implements EventSubscriberInterface
         }
     }
 
-    private function getOriginalException(\Throwable $e): \Throwable
+    private function getOriginalException(Throwable $e): Throwable
     {
         return $e->getPrevious() ? $this->getOriginalException($e->getPrevious()) : $e;
     }

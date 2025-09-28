@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Access\Application\Command;
 
 use App\Access\Application\Exception\UserCredentialsIsNotValidException;
@@ -8,7 +10,6 @@ use App\Access\Domain\Model\User;
 use App\Access\Domain\Repository\UserRepositoryInterface;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
-use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 #[AsMessageHandler]
 final class RegisterUserHandler
@@ -16,8 +17,7 @@ final class RegisterUserHandler
     public function __construct(
         private readonly UserRepositoryInterface     $userRepository,
         private readonly UserPasswordHasherInterface $passwordHasher,
-    )
-    {
+    ) {
     }
 
     /**

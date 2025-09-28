@@ -9,5 +9,6 @@ final class CreateBudgetCommand
     public function __construct(
         public string $name,
         public string $currency
-    ) {}
+    ) {
+    }
 }

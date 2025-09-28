@@ -7,7 +7,6 @@ namespace App\Budget\Application\Command;
 use App\Access\Domain\Model\User;
 use App\Budget\Application\Exception\AddAccountException;
 use App\Budget\Application\Exception\CreateBudgetException;
-use App\Budget\Domain\Model\Budget;
 use App\Budget\Domain\Model\Money;
 use App\Budget\Domain\Repository\BudgetRepositoryInterface;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
@@ -18,8 +17,9 @@ final readonly class AddAccountHandler
 {
     public function __construct(
         private BudgetRepositoryInterface $budgetRepository,
-        private TokenStorageInterface $tokenStorage
-    ) {}
+        private TokenStorageInterface     $tokenStorage
+    ) {
+    }
 
     /**
      * @throws AddAccountException
@@ -31,7 +31,6 @@ final readonly class AddAccountHandler
             throw new CreateBudgetException('User must be authenticated to create a budget.');
         }
 
-        /** @var Budget $budget */
         $budget = $this->budgetRepository->findOneByUser($user);
 
         if (!$budget) {

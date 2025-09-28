@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Access\Infrastructure\EventSubscriber;
 
 use App\Access\BaseAccessApplicationException;
@@ -7,6 +9,7 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpKernel\Event\ExceptionEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
+use Throwable;
 
 class AccessExceptionSubscriber implements EventSubscriberInterface
 {
@@ -30,7 +33,7 @@ class AccessExceptionSubscriber implements EventSubscriberInterface
         }
     }
 
-    private function getOriginalException(\Throwable $e): \Throwable
+    private function getOriginalException(Throwable $e): Throwable
     {
         return $e->getPrevious() ? $this->getOriginalException($e->getPrevious()) : $e;
     }

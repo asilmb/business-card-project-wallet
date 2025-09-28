@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Tests\Unit\Access;
 
 use App\Access\Domain\Model\User;
@@ -7,7 +9,6 @@ use App\Tests\UnitTestCase;
 
 class UserTest extends UnitTestCase
 {
-
     public function testRolesAreHandledCorrectly(): void
     {
         $user = new User();
@@ -30,5 +31,4 @@ class UserTest extends UnitTestCase
 
         $this->assertSame('test@example.com', $user->getUserIdentifier());
     }
-
 }

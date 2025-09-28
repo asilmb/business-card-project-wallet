@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Access\Infrastructure\Repository\Persistence\Doctrine;
 
 use App\Access\Domain\Model\User;

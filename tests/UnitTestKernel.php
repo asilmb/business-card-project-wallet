@@ -11,5 +11,4 @@ use Symfony\Component\HttpKernel\KernelInterface;
 class UnitTestKernel extends BaseKernel implements KernelInterface
 {
     use MicroKernelTrait;
-
 }

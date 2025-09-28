@@ -20,7 +20,7 @@ final class ResponseSerializer
         return new SuccessResponse(
             $this->serializer->serialize(
                 [
-                    'data'    => $responseObject,
+                    'data' => $responseObject,
                 ],
                 JsonEncoder::FORMAT,
             ),

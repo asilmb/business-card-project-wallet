@@ -1,8 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Access\Domain\Model;
 
 use App\Access\Infrastructure\Repository\Persistence\Doctrine\UserRepository;
+use Deprecated;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -93,7 +96,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    #[\Deprecated]
+    #[Deprecated]
     public function eraseCredentials(): void
     {
     }

@@ -7,6 +7,7 @@ namespace App\Budget\Infrastructure\Controller\BudgetController;
 use App\Application\Controller\AbstractController;
 use App\Budget\Application\Command\CreateBudgetCommand;
 use App\Budget\Application\Query\GetMyBudgetQuery;
+use App\Budget\Domain\Model\Budget;
 use App\Budget\Infrastructure\Controller\BudgetController\View\BudgetCreated;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -23,7 +24,7 @@ class BudgetController extends AbstractController
 
     public function __construct(
         private readonly MessageBusInterface $commandBus,
-        private readonly MessageBusInterface $queryBus,
+        MessageBusInterface                  $queryBus,
     ) {
         $this->messageBus = $queryBus;
     }
@@ -50,7 +51,7 @@ class BudgetController extends AbstractController
         if (null === $budget) {
             return $this->responseSerializer->errorResponse('Budget not found for the current user.', Response::HTTP_NOT_FOUND);
         }
-
+        /** @var Budget $budget */
         return $this->responseSerializer->successResponse($budget);
     }
 }
