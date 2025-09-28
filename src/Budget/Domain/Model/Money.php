@@ -11,18 +11,18 @@ final class Money
 {
     public const CREATE_EXCEPTION_MESSAGE = 'Amount cannot be negative.';
     /**
-     * @param float $amount
+     * @param int $amount
      * @param Currency $currency
      */
     private function __construct(
-        public float $amount,
+        public int $amount,
         public Currency $currency
     ) { }
 
     /**
      * @throws MoneyCreateException
      */
-    public static function fromAmount(float $amount, Currency $currency): Money {
+    public static function fromAmount(int $amount, Currency $currency): Money {
         if ($amount < 0) {
             throw new MoneyCreateException(self::CREATE_EXCEPTION_MESSAGE);
         }

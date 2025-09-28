@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Shared\Infrastructure\EventSubscriber;
+namespace App\Shared\Exception\Infrastructure\EventSubscriber;
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;

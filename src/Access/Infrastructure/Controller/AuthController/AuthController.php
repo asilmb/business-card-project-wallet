@@ -2,10 +2,10 @@
 declare(strict_types=1);
 
 
-namespace App\Access\Infrastructure\Controller;
+namespace App\Access\Infrastructure\Controller\AuthController;
 
 use App\Access\Application\Command\RegisterUserCommand;
-use App\Access\Infrastructure\Controller\AuthController\UserCreated;
+use App\Access\Infrastructure\Controller\AuthController\View\UserCreated;
 use App\Application\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

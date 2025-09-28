@@ -4,15 +4,16 @@ declare(strict_types=1);
 
 namespace App\Budget\Application\Command;
 
+use App\Access\Domain\Model\User;
 use App\Budget\Application\Exception\AddAccountException;
+use App\Budget\Application\Exception\CreateBudgetException;
 use App\Budget\Domain\Model\Budget;
 use App\Budget\Domain\Model\Money;
 use App\Budget\Domain\Repository\BudgetRepositoryInterface;
-use App\Shared\Domain\ValueObject\Currency;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
-#[AsMessageHandler]
+#[AsMessageHandler(bus: 'command.bus')]
 final readonly class AddAccountHandler
 {
     public function __construct(
@@ -25,20 +26,19 @@ final readonly class AddAccountHandler
      */
     public function __invoke(AddAccountCommand $command): void
     {
+        $user = $this->tokenStorage->getToken()?->getUser();
+        if (!$user instanceof User) {
+            throw new CreateBudgetException('User must be authenticated to create a budget.');
+        }
+
         /** @var Budget $budget */
-        $budget = $this->budgetRepository->find($command->budgetId);
+        $budget = $this->budgetRepository->findOneByUser($user);
 
         if (!$budget) {
             throw new AddAccountException('Budget not found');
         }
 
-        $currentUser = $this->tokenStorage->getToken()?->getUser();
-        if ($budget->getOwner() !== $currentUser) {
-            throw new AddAccountException('You are not the owner of this budget.');
-        }
-
-        $currency = Currency::from($command->currency);
-        $initialBalance = Money::fromAmount($command->initialBalanceAmount, $currency);
+        $initialBalance = Money::fromAmount($command->initialBalanceAmount, $budget->getCurrency());
 
         $budget->addAccount($command->name, $initialBalance);
 

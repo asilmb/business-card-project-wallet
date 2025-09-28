@@ -8,9 +8,9 @@ use App\Budget\BaseBudgetApplicationException;
 use Symfony\Component\HttpFoundation\Response;
 use Throwable;
 
-final class CreateBudgetException extends BaseBudgetApplicationException
+final class CreateAccountException extends BaseBudgetApplicationException
 {
-    public const MESSAGE = 'Create budget error';
+    public const MESSAGE = 'Create account error';
 
     public function __construct(string $message = self::MESSAGE, int $code = Response::HTTP_CONFLICT, ?Throwable $previous = null)
     {

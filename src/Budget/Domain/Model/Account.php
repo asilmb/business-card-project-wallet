@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Budget\Domain\Model;
 
-use App\Shared\Domain\ValueObject\Currency;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity]
@@ -20,9 +19,6 @@ class Account
     #[ORM\Column]
     private int $balance;
 
-    #[ORM\Column(length: 3)]
-    private Currency $currency;
-
     #[ORM\ManyToOne(targetEntity: Budget::class, inversedBy: 'accounts')]
     #[ORM\JoinColumn(nullable: false, onDelete: 'CASCADE')]
     private Budget $budget;
@@ -32,6 +28,15 @@ class Account
         $this->budget = $budget;
         $this->name = $name;
         $this->balance = $initialBalance->amount;
-        $this->currency = $initialBalance->currency;
+    }
+
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    public function getBalance(): float
+    {
+        return $this->balance;
     }
 }

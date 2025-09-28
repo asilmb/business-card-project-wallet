@@ -25,6 +25,9 @@ db-test-reset:
 composer-install:
 	$(RUN_CMD) composer install
 
+migration:
+	$(RUN_CMD) php bin/console make:migration
+
 migrate:
 	$(RUN_CMD) php bin/console doctrine:migrations:migrate --no-interaction
 

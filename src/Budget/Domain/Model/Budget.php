@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App\Budget\Domain\Model;
 
 use App\Access\Domain\Model\User;
+use App\Budget\Domain\Exception\BudgetCreateException;
+use App\Shared\Domain\ValueObject\Currency;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -27,28 +29,34 @@ class Budget
     #[ORM\OneToMany(mappedBy: 'budget', targetEntity: Account::class, cascade: ['persist', 'remove'], orphanRemoval: true)]
     private Collection $accounts;
 
+    #[ORM\Column(length: 3, enumType: Currency::class)]
+    private Currency $currency;
+
+
     private function __construct(
         User $owner,
         string $name,
-        ArrayCollection $accounts = new ArrayCollection())
+        Currency $currency,
+        ArrayCollection $accounts = new ArrayCollection(),
+    )
     {
         $this->owner = $owner;
         $this->name = $name;
+        $this->currency = $currency;
         $this->accounts = $accounts;
     }
 
-    public static function create(User $owner, string $name): Budget
+    public static function create(User $owner, string $name, Currency $currency): Budget
     {
-        return new self($owner, $name);
-    }
-
-    public static function createWithAccounts(User $owner, string $name, ArrayCollection $accounts): Budget
-    {
-        return new self($owner, $name, $accounts);
+        return new self($owner, $name, $currency);
     }
 
     public function addAccount(string $name, Money $initialBalance): void
     {
+        if ($initialBalance->currency !== $this->currency) {
+            throw new BudgetCreateException('Account currency must match the budget currency.');
+        }
+
         $account = new Account($this, $name, $initialBalance);
         $this->accounts->add($account);
     }
@@ -58,8 +66,19 @@ class Budget
         return $this->id;
     }
 
-    public function getOwner(): User
+    public function getName(): string
     {
-        return $this->owner;
+        return $this->name;
+    }
+
+    public function getAccounts(): Collection
+    {
+
+        return $this->accounts;
+    }
+
+    public function getCurrency(): Currency
+    {
+        return $this->currency;
     }
 }

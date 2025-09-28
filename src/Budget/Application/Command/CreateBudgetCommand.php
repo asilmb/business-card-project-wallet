@@ -8,6 +8,6 @@ final class CreateBudgetCommand
 {
     public function __construct(
         public string $name,
-        public int $ownerId
+        public string $currency
     ) {}
 }

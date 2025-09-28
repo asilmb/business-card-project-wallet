@@ -21,4 +21,10 @@ return static function (DoctrineConfig $doctrine) {
         ->dir('%kernel.project_dir%/src/Access/Domain/Model')
         ->prefix('App\Access\Domain\Model')
         ->alias('Access');
+
+    $em->mapping('Budget')
+        ->isBundle(false)
+        ->dir('%kernel.project_dir%/src/Budget/Domain/Model')
+        ->prefix('App\Budget\Domain\Model')
+        ->alias('Budget');
 };

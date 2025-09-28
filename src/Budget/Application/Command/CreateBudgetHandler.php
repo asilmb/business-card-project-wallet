@@ -8,10 +8,11 @@ use App\Access\Domain\Model\User;
 use App\Budget\Application\Exception\CreateBudgetException;
 use App\Budget\Domain\Model\Budget;
 use App\Budget\Domain\Repository\BudgetRepositoryInterface;
+use App\Shared\Domain\ValueObject\Currency;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
-#[AsMessageHandler]
+#[AsMessageHandler(bus: 'command.bus')]
 final class CreateBudgetHandler
 {
     public function __construct(
@@ -33,7 +34,11 @@ final class CreateBudgetHandler
             throw new CreateBudgetException('User already has a budget.');
         }
 
-        $budget = new Budget($user, $command->name);
+        $currency = Currency::tryFrom($command->currency);
+        if (null === $currency) {
+            throw new CreateBudgetException('Currency not found.');
+        }
+        $budget = Budget::create($user, $command->name, $currency);
         $this->budgetRepository->save($budget);
     }
 }
