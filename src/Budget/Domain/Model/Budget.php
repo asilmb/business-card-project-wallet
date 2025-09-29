@@ -7,6 +7,7 @@ namespace App\Budget\Domain\Model;
 use App\Access\Domain\Model\User;
 use App\Budget\Domain\Exception\BudgetCreateException;
 use App\Shared\Domain\ValueObject\Currency;
+use App\Shared\Domain\ValueObject\Money;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -55,7 +56,7 @@ class Budget
 
     public function addAccount(string $name, Money $initialBalance): void
     {
-        if ($initialBalance->currency !== $this->currency) {
+        if ($initialBalance->getCurrency() !== $this->currency) {
             throw new BudgetCreateException('Account currency must match the budget currency.');
         }
 

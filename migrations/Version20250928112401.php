@@ -25,7 +25,7 @@ final class Version20250928112401 extends AbstractMigration
         $this->addSql('CREATE TABLE budget_account (id INT NOT NULL, budget_id INT NOT NULL, name VARCHAR(255) NOT NULL, balance INT NOT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE INDEX IDX_BFB51C4536ABA6B8 ON budget_account (budget_id)');
         $this->addSql('ALTER TABLE budget ADD CONSTRAINT FK_73F2F77B7E3C61F9 FOREIGN KEY (owner_id) REFERENCES "user" (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
-        $this->addSql('ALTER TABLE budget_account ADD CONSTRAINT FK_BFB51C4536ABA6B8 FOREIGN KEY (budget_id) REFERENCES budget (id) ON DELETE CASCADE NOT DEFERRABLE INITIALLY IMMEDIATE');
+        $this->addSql('ALTER TABLE budget_account ADD CONSTRAINT FK_BFB51C4536ABA6B8 FOREIGN KEY ( budget_id) REFERENCES budget (id) ON DELETE CASCADE NOT DEFERRABLE INITIALLY IMMEDIATE');
     }
 
     public function down(Schema $schema): void

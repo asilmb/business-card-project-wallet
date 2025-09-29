@@ -27,4 +27,10 @@ return static function (DoctrineConfig $doctrine) {
         ->dir('%kernel.project_dir%/src/Budget/Domain/Model')
         ->prefix('App\Budget\Domain\Model')
         ->alias('Budget');
+
+    $em->mapping('Shared')
+        ->isBundle(false)
+        ->dir('%kernel.project_dir%/src/Shared/Domain/ValueObject')
+        ->prefix('App\Shared\Domain\ValueObject')
+        ->alias('Shared');
 };

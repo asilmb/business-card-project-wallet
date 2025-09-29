@@ -7,8 +7,8 @@ namespace App\Budget\Application\Command;
 use App\Access\Domain\Model\User;
 use App\Budget\Application\Exception\AddAccountException;
 use App\Budget\Application\Exception\CreateBudgetException;
-use App\Budget\Domain\Model\Money;
 use App\Budget\Domain\Repository\BudgetRepositoryInterface;
+use App\Shared\Domain\ValueObject\Money;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
