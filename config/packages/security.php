@@ -29,6 +29,7 @@ return static function (SecurityConfig $security): void {
         'jwt' => [],
         'provider' => 'app_user_provider',
     ]);
+    $security->accessControl()->path('^/api')->methods(['OPTIONS'])->roles(['PUBLIC_ACCESS']);
 
     $security->accessControl()->path('^/api/auth/login')->roles(['PUBLIC_ACCESS']);
     $security->accessControl()->path('^/api/auth/register')->roles(['PUBLIC_ACCESS']);
