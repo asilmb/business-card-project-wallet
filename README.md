@@ -85,15 +85,12 @@
 
 | Release | Included Epics | Description |
 |----------|----------------|-------------|
-| **MVP** | Epics 1, 2, 3, 4 | Core functionality — user can manage budgets and track transactions. |
+| **MVP** | Epics 1, 2 | Core functionality — user can manage budgets and track transactions. |
 
 ---
 
 ## Future Improvements (Backlog)
 - Multi-currency support.
-- Shared budgets for families or teams.
-- Import transactions from bank accounts.
 - Mobile application.
-- Notifications and alerts.
 
 ---
